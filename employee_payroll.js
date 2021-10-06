@@ -41,4 +41,10 @@ function sum(dailyWage){
 
 employeeDailyWageArray.forEach(sum);
 console.log("Total Days: " + totalWorkingDays + " WorkHrs = "
- + totalWorkHours + " Wage = " + totalWage);
+ + totalWorkHours + " Total Wage = " + totalWage);
+
+ function totalWages(totalWage, dailyWage) {
+     return totalWage + dailyWage;
+ }
+
+ console.log("Total Wage with reduce = " + employeeDailyWageArray.reduce(totalWages,0));

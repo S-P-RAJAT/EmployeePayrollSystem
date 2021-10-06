@@ -58,3 +58,10 @@ console.log("Total Days: " + totalWorkingDays + " WorkHrs = "
 
  let mapDayWithWageArray = employeeDailyWageArray.map(mapDayWithWage);
  console.log("Daily Wage Map", mapDayWithWageArray);
+
+ function fulltimeWage(dailyWage) {
+     return dailyWage.includes("160");
+ }
+
+ let fullDayWageArr = mapDayWithWageArray.filter(fulltimeWage) ;
+console. log("Daily Wage Filter When Fulltime Wage Earned", fullDayWageArr) ;

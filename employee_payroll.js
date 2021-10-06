@@ -80,3 +80,9 @@ function isAllFulltimeWage(dailyWage) {
 console.log("Check all elements have fulltime wage:",
     fullDayWageArray.every(isAllFulltimeWage));
 
+function isAnyPartTimeWage(dailyWage) {
+    return dailyWage.includes("80");
+}
+
+console.log("Check if any part time wage " + 
+    mapDayWithWageArray.some(isAnyPartTimeWage));

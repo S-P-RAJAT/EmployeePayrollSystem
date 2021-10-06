@@ -34,5 +34,11 @@ while (totalWorkingDays < NO_OF_WRK_DAYS && totalWorkHours <= MAX_WRK_HRS) {
     totalWorkHours += employeeHours;
     employeeDailyWageArray.push(calculateWage(employeeHours))
 }
-totalWage = calculateWage(totalWorkHours);
-console.log("Total Days: " + totalWorkingDays + " WorkHrs = " + totalWorkHours + " Wage = " + totalWage);
+
+function sum(dailyWage){
+    totalWage += dailyWage;
+}
+
+employeeDailyWageArray.forEach(sum);
+console.log("Total Days: " + totalWorkingDays + " WorkHrs = "
+ + totalWorkHours + " Wage = " + totalWage);

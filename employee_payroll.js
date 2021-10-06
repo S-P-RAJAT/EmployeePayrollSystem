@@ -48,3 +48,13 @@ console.log("Total Days: " + totalWorkingDays + " WorkHrs = "
  }
 
  console.log("Total Wage with reduce = " + employeeDailyWageArray.reduce(totalWages,0));
+
+ let dayCounter = 0;
+
+ function mapDayWithWage(dailyWage) {
+     dayCounter++;
+     return dayCounter + " = " + dailyWage;
+ }
+
+ let mapDayWithWageArray = employeeDailyWageArray.map(mapDayWithWage);
+ console.log("Daily Wage Map", mapDayWithWageArray);

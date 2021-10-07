@@ -7,7 +7,7 @@ const NO_OF_WRK_DAYS = 20;
 const MAX_WRK_HRS = 160;
 
 
-function getWorkHRs(empCheck) {
+function getWorkingHours(empCheck) {
     switch (empCheck) {
         case IS_PART_TIME:
             return PART_TIME_HRS;
@@ -33,7 +33,7 @@ let employeeHoursMap = new Map();
 while (totalWorkingDays < NO_OF_WRK_DAYS && totalWorkHours <= MAX_WRK_HRS) {
     totalWorkingDays++;
     employeeCheck = Math.floor(Math.random() * 10) % 3;
-    employeeHours = getWorkHRs(employeeCheck);
+    employeeHours = getWorkingHours(employeeCheck);
     totalWorkHours += employeeHours;
     employeeDailyWageArray.push(calculateWage(employeeHours));
     employeeHoursMap.set(totalWorkingDays, employeeHours);
@@ -124,3 +124,26 @@ employeeHoursMap.forEach((value, key, map) => {
 console.log("Full working days: " + fullWorkingDays);
 console.log("Part working days: " + partWorkingDays);
 console.log("Non working days: " + nonWorkingDays);
+
+{
+    let totalEmpHrs = 0;
+    let totalWorkingDays = 0;
+    let employeeDailyHoursAndWageArray = new Array();
+    while(totalEmpHrs <= MAX_WRK_HRS && totalWorkingDays < NO_OF_WRK_DAYS) {
+        totalWorkingDays++;
+        let empCheck = Math.floor(Math.random() * 10) % 3;
+        let empHrs = getWorkingHours(empCheck);
+        totalEmpHrs += empHrs;
+        employeeDailyHoursAndWageArray.push(
+            {
+                dayNum:totalWorkingDays,
+                dailyHours:empHrs,
+                dailyWage:calculateWage(empHrs),
+                toString(){
+                    return '\nDay' + this.dayNum + ' => Working Hours is ' + this.dailyHours + ' And Wage Earned = ' + this.dailyWage
+                },
+            }
+        );
+    }
+    console.log("Showing daily hours worked and wage earned: "+employeeDailyHoursAndWageArray);
+}

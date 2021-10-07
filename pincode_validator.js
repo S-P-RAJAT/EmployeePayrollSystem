@@ -10,7 +10,7 @@ class PincodeValidator{
 
     set pincode(pincode) {
 
-        let idRegex = RegExp('^[0-9]{6}$');
+        let idRegex = RegExp('^[0-9]{3}[ ]?[0-9]{3}$');
         if (idRegex.test(pincode)) {
             this._pincode = pincode;
         }
@@ -24,7 +24,7 @@ class PincodeValidator{
 }
 //valid
 try {
-    let validator = new PincodeValidator(123456);
+    let validator = new PincodeValidator("123 456");
     console.log(validator.toString());
 }
 catch (e) {
@@ -32,7 +32,7 @@ catch (e) {
 }
 //invalid
 try {
-    let validator = new PincodeValidator("124536B");
+    let validator = new PincodeValidator("A124 536");
     console.log(validator.toString());
 }
 catch (e) {

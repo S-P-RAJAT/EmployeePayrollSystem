@@ -45,7 +45,7 @@ function sum(dailyWage) {
 }
 
 employeeDailyWageArray.forEach(sum);
-console.log("Total Days: " + totalWorkingDays + " WorkHrs = "
+console.log("Total Days: " + totalWorkingDays + " WorkHours = "
     + totalWorkHours + " Total Wage = " + totalWage);
 
 function totalWages(totalWage, dailyWage) {
@@ -126,24 +126,43 @@ console.log("Part working days: " + partWorkingDays);
 console.log("Non working days: " + nonWorkingDays);
 
 {
-    let totalEmpHrs = 0;
+    let totalEmpHours = 0;
     let totalWorkingDays = 0;
     let employeeDailyHoursAndWageArray = new Array();
-    while(totalEmpHrs <= MAX_WRK_HRS && totalWorkingDays < NO_OF_WRK_DAYS) {
+    while (totalEmpHours <= MAX_WRK_HRS && totalWorkingDays < NO_OF_WRK_DAYS) {
         totalWorkingDays++;
         let empCheck = Math.floor(Math.random() * 10) % 3;
-        let empHrs = getWorkingHours(empCheck);
-        totalEmpHrs += empHrs;
+        let empHours = getWorkingHours(empCheck);
+        totalEmpHours += empHours;
         employeeDailyHoursAndWageArray.push(
             {
-                dayNum:totalWorkingDays,
-                dailyHours:empHrs,
-                dailyWage:calculateWage(empHrs),
-                toString(){
+                dayNum: totalWorkingDays,
+                dailyHours: empHours,
+                dailyWage: calculateWage(empHours),
+                toString() {
                     return '\nDay' + this.dayNum + ' => Working Hours is ' + this.dailyHours + ' And Wage Earned = ' + this.dailyWage
                 },
             }
         );
     }
-    console.log("Showing daily hours worked and wage earned: "+employeeDailyHoursAndWageArray);
+    console.log("Showing daily hours worked and wage earned: " + employeeDailyHoursAndWageArray);
+
+
+    let totalWage = employeeDailyHoursAndWageArray.filter(dailyHoursAndWage => dailyHoursAndWage.dailyWage > 0)
+        .reduce((totalWages, dailyHoursAndWage) => totalWages += dailyHoursAndWage.dailyWage, 0);
+    let totalHours = employeeDailyHoursAndWageArray.filter(dailyHoursAndWage => dailyHoursAndWage.dailyWage > 0)
+        .reduce((totalHours, dailyHoursAndWage) => totalHours += dailyHoursAndWage.dailyHours, 0);
+
+    console.log("Total hours: " + totalHours + " Total wage: " + totalWage);
+
+    process.stdout.write("\nLogging full work days")
+    employeeDailyHoursAndWageArray.filter(dailyHoursAndWage => dailyHoursAndWage.dailyHours == 8)
+        .forEach(dailyHoursAndWage => process.stdout.write(dailyHoursAndWage.toString()));
+    let partWorkingDayStrArr = employeeDailyHoursAndWageArray.filter(dailyHoursAndWage => dailyHoursAndWage.dailyHours == 4)
+        .map(dailyHoursAndWage => dailyHoursAndWage.toString());
+    console.log("\n\nPart working days strings " + partWorkingDayStrArr);
+
+    let nonWorkingDayNums = employeeDailyHoursAndWageArray.filter(dailyHoursAndWage => dailyHoursAndWage.dailyHours == 0)
+        .map(dailyHoursAndWage => dailyHoursAndWage.dayNum);
+    console.log("\nNon working days " + nonWorkingDayNums);
 }
